@@ -1,36 +1,46 @@
 import { describe, expect, it } from "vitest";
-import { nextCueId, prevCueId, resolveCue } from "../src/player";
+import { nextMarkId, prevMarkId, resolveMark } from "../src/player";
 import { tinyProject, tinyStaging } from "./fixtures";
 
-describe("트래킹", () => {
-  it("인물 자세만 바꾸면 위치는 이전 큐 그대로 남는다", () => {
-    const p = resolveCue(tinyProject(), tinyStaging(), "q3").characters.p;
-    expect(p).toMatchObject({ x: 0, z: 2, posture: "stand", onStage: true });
+describe("지정 인물", () => {
+  it("지정 포인트에 적힌 인물만 나온다", () => {
+    expect(resolveMark(tinyProject(), tinyStaging(), "m1").characters.p).toMatchObject({ x: 0, z: 2, posture: "sit" });
   });
 
-  it("물체의 넘어짐만 바꾸면 위치는 이전 큐에서 옮긴 그대로 남는다", () => {
-    const box = resolveCue(tinyProject(), tinyStaging(), "q3").objects.box;
-    expect(box).toEqual({ position: { x: 1, y: 0, z: 2 }, tipped: false });
+  it("다음 포인트에 적히지 않은 인물은 이어받지 않는다(배우 재량)", () => {
+    expect(resolveMark(tinyProject(), tinyStaging(), "m2").characters).toEqual({});
   });
 
-  it("없는 큐를 부르면 에러가 난다", () => {
-    expect(() => resolveCue(tinyProject(), tinyStaging(), "nope")).toThrow();
+  it("배치에 값이 없는 포인트에는 지정된 인물이 없다", () => {
+    const staging = { ...tinyStaging(), marks: tinyStaging().marks.filter((m) => m.markId !== "m1") };
+    expect(resolveMark(tinyProject(), staging, "m1").characters).toEqual({});
   });
-});
 
-describe("작품과 배치 나누기", () => {
-  it("배치에 값이 없는 큐는 직전 큐 상태를 그대로 유지한다", () => {
-    const staging = { ...tinyStaging(), cues: tinyStaging().cues.filter((c) => c.cueId !== "q2") };
-    expect(resolveCue(tinyProject(), staging, "q2")).toEqual(resolveCue(tinyProject(), staging, "q1"));
+  it("없는 포인트를 부르면 에러가 난다", () => {
+    expect(() => resolveMark(tinyProject(), tinyStaging(), "nope")).toThrow();
   });
 });
 
-describe("큐 넘기기", () => {
-  it("다음 큐와 이전 큐를 찾고, 끝에서는 null을 준다", () => {
+describe("물체 트래킹", () => {
+  it("옮긴 물체는 다음 포인트에서도 그 자리에 있다", () => {
+    expect(resolveMark(tinyProject(), tinyStaging(), "m2").objects.box).toEqual({ position: { x: 1, y: 0, z: 2 }, tipped: true });
+  });
+
+  it("물체의 넘어짐만 바꾸면 위치는 이전 포인트에서 옮긴 그대로 남는다", () => {
+    expect(resolveMark(tinyProject(), tinyStaging(), "m3").objects.box).toEqual({ position: { x: 1, y: 0, z: 2 }, tipped: false });
+  });
+
+  it("아직 옮기기 전 포인트에서는 처음 자리에 있다", () => {
+    expect(resolveMark(tinyProject(), tinyStaging(), "m1").objects.box).toBeUndefined();
+  });
+});
+
+describe("포인트 넘기기", () => {
+  it("다음 포인트와 이전 포인트를 찾고, 끝에서는 null을 준다. 장이 바뀌어도 이어진다", () => {
     const p = tinyProject();
-    expect(nextCueId(p, "q1")).toBe("q2");
-    expect(nextCueId(p, "q3")).toBeNull();
-    expect(prevCueId(p, "q1")).toBeNull();
-    expect(prevCueId(p, "q3")).toBe("q2");
+    expect(nextMarkId(p, "m2")).toBe("m3");
+    expect(nextMarkId(p, "m3")).toBeNull();
+    expect(prevMarkId(p, "m1")).toBeNull();
+    expect(prevMarkId(p, "m3")).toBe("m2");
   });
 });

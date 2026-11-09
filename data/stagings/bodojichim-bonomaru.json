@@ -345,153 +345,163 @@
       "tipped": true
     }
   ],
-  "cues": [
+  "dataVersion": "2026-11-09.1",
+  "notes": [
+    "단·책상·의자 위치는 공연장 방문 전 가정. 현장에서 바뀔 가능성 큼",
+    "상수·하수 책상은 서로 마주 보되 객석 쪽으로 45도 열림. 의자는 책상 바깥쪽",
+    "연기 공간 = 폭 8m × 깊이 5m. 책상·의자는 모두 이 안. 두 책상 사이 가장 좁은 폭 약 4.1m",
+    "덧마루 한 장 두께 약 14.5cm는 사진으로 추정한 값 (4층 윗면 58cm)",
+    "단 시안: 4층 계단형. 1층 폭 6.06m는 무대 중앙에 대칭, 2~4층 왼쪽 끝은 1층 왼쪽 끝에서 1.82m 지점의 기준선에 맞춤. 3×6 = 0.91m, 2×6 = 0.606m, 1×6 = 0.303m, 깊이 1.82m",
+    "엎어진 의자(상수)는 단 위 빈 폭이 좁아 단 옆 바닥으로 옮김. 판사 책상·의자는 4층 위.",
+    "지정 포인트 1~6은 조명 큐 데이터(0~6번 큐)를 옮긴 초안. 실제 연출 지정 동선인지 검토 필요. 5번은 메모대로 돈결·주혁만 남김(예전 데이터에선 정배·승욱·원달이 앉은 채 남아 있었음)"
+  ],
+  "marks": [
     {
-      "cueId": "cue-0",
-      "blocking": [
-        {
-          "characterId": "juhyuk",
-          "onStage": false
-        },
-        {
-          "characterId": "jeongbae",
-          "onStage": false
-        },
-        {
-          "characterId": "seunguk",
-          "onStage": false
-        },
-        {
-          "characterId": "dongyeol",
-          "onStage": false
-        },
-        {
-          "characterId": "wondal",
-          "onStage": false
-        },
-        {
-          "characterId": "voice-1",
-          "onStage": false
-        },
-        {
-          "characterId": "voice-2",
-          "onStage": false
-        }
-      ]
-    },
-    {
-      "cueId": "cue-1",
+      "markId": "mark-1",
       "blocking": [
         {
           "characterId": "juhyuk",
           "x": -0.9,
           "z": 1.0,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
           "characterId": "jeongbae",
           "x": 0.9,
           "z": 1.0,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         }
-      ]
+      ],
+      "objects": []
     },
     {
-      "cueId": "cue-2",
+      "markId": "mark-2",
       "blocking": [
-        {
-          "characterId": "juhyuk",
-          "onStage": false
-        },
-        {
-          "characterId": "jeongbae",
-          "onStage": false
-        },
         {
           "characterId": "voice-1",
           "x": -1.9,
           "z": 0.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
           "characterId": "voice-2",
           "x": 1.9,
           "z": 0.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         }
-      ]
+      ],
+      "objects": []
     },
     {
-      "cueId": "cue-3",
+      "markId": "mark-3",
       "blocking": [
-        {
-          "characterId": "dongyeol",
-          "x": -3.22,
-          "z": 1.92,
-          "facing": -45,
-          "posture": "sit",
-          "onStage": true
-        },
         {
           "characterId": "juhyuk",
           "x": 2.89,
           "z": 2.26,
           "facing": 45,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
         },
         {
           "characterId": "jeongbae",
           "x": 3.22,
           "z": 1.92,
           "facing": 45,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
         },
         {
           "characterId": "seunguk",
           "x": 3.56,
           "z": 1.59,
           "facing": 45,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -3.22,
+          "z": 1.92,
+          "facing": -45,
+          "posture": "sit"
         },
         {
           "characterId": "wondal",
           "x": 0,
           "z": 4.73,
           "facing": 0,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -1.9,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "voice-2",
+          "x": 1.9,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
         }
-      ]
+      ],
+      "objects": []
     },
     {
-      "cueId": "cue-4",
+      "markId": "mark-4",
       "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 2.89,
+          "z": 2.26,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 3.22,
+          "z": 1.92,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 3.56,
+          "z": 1.59,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -3.22,
+          "z": 1.92,
+          "facing": -45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit"
+        },
         {
           "characterId": "voice-1",
           "x": -2.25,
           "z": 4.2,
           "facing": 0,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
         },
         {
           "characterId": "voice-2",
           "x": 1.5,
           "z": 2.75,
           "facing": 0,
-          "posture": "sit",
-          "onStage": true
+          "posture": "sit"
         }
       ],
       "objects": [
@@ -513,85 +523,65 @@
       ]
     },
     {
-      "cueId": "cue-5",
+      "markId": "mark-5",
       "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 2.89,
+          "z": 2.26,
+          "facing": 45,
+          "posture": "sit"
+        },
         {
           "characterId": "dongyeol",
           "x": 0.6,
           "z": 1.0,
           "facing": -60,
-          "posture": "stand",
-          "onStage": true
-        },
-        {
-          "characterId": "voice-1",
-          "onStage": false
-        },
-        {
-          "characterId": "voice-2",
-          "onStage": false
+          "posture": "stand"
         }
       ],
       "objects": []
     },
     {
-      "cueId": "cue-6",
+      "markId": "mark-6",
       "blocking": [
         {
-          "characterId": "dongyeol",
-          "x": -1.2,
+          "characterId": "juhyuk",
+          "x": 1.2,
           "z": 1.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
           "characterId": "jeongbae",
           "x": -0.4,
           "z": 1.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
           "characterId": "seunguk",
           "x": 0.4,
           "z": 1.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
-          "characterId": "juhyuk",
-          "x": 1.2,
+          "characterId": "dongyeol",
+          "x": -1.2,
           "z": 1.8,
           "facing": 0,
-          "posture": "stand",
-          "onStage": true
+          "posture": "stand"
         },
         {
           "characterId": "voice-1",
           "x": -1.8,
           "z": 1.5,
           "facing": -110,
-          "posture": "stand",
-          "onStage": true
-        },
-        {
-          "characterId": "wondal",
-          "onStage": false
+          "posture": "stand"
         }
       ],
       "objects": []
     }
-  ],
-  "dataVersion": "2026-11-05.18",
-  "notes": [
-    "단·책상·의자 위치는 공연장 방문 전 가정. 현장에서 바뀔 가능성 큼",
-    "상수·하수 책상은 서로 마주 보되 객석 쪽으로 45도 열림. 의자는 책상 바깥쪽",
-    "연기 공간 = 폭 8m × 깊이 5m. 책상·의자는 모두 이 안. 두 책상 사이 가장 좁은 폭 약 4.1m",
-    "덧마루 한 장 두께 약 14.5cm는 사진으로 추정한 값 (4층 윗면 58cm)",
-    "단 시안: 4층 계단형. 1층 폭 6.06m는 무대 중앙에 대칭, 2~4층 왼쪽 끝은 1층 왼쪽 끝에서 1.82m 지점의 기준선에 맞춤. 3×6 = 0.91m, 2×6 = 0.606m, 1×6 = 0.303m, 깊이 1.82m",
-    "엎어진 의자(상수)는 단 위 빈 폭이 좁아 단 옆 바닥으로 옮김. 판사 책상·의자는 4층 위."
   ]
 }

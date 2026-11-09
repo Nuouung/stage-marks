@@ -37,7 +37,7 @@ export function composeStage(stage: Stage, project: Project, staging: Staging): 
   return { stage, curtains, objects };
 }
 
-/** 큐에서 옮긴 물체를 반영한 공연용 무대를 새로 만들어 돌려준다. */
+/** 지정 포인트에서 옮긴 물체를 반영한 공연용 무대를 새로 만들어 돌려준다. */
 export function moveObjects(composed: ComposedStage, moves: Record<string, ObjectLook>): ComposedStage {
   return { ...composed, objects: composed.objects.map((o) => ({ ...o, ...moves[o.id] })) };
 }

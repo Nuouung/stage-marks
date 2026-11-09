@@ -57,7 +57,7 @@ describe("공연장 파일", () => {
   });
 });
 
-describe("큐에서 물체 옮기기", () => {
+describe("지정 포인트에서 물체 옮기기", () => {
   it("옮긴 물체만 바뀌고 원본 무대는 그대로다", () => {
     const composed = composeStage(Stage.parse({ ...bonomaru, id: "s" }), tinyProject(), tinyStaging());
     const moved = moveObjects(composed, { box: { position: { x: 1, y: 0, z: 2 }, tipped: true } });

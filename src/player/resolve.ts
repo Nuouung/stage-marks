@@ -1,12 +1,13 @@
 import type { Blocking, ObjectMove, Project, Staging } from "../model";
 
-/** 화면에 그릴 인물 한 명의 최종 값 (characterId 제외) */
+/** 화면에 그릴 인물 한 명의 값 (characterId 제외) */
 export type CharacterLook = Omit<Blocking, "characterId">;
-/** 큐에서 옮긴 물체 하나의 최종 값 (objectId 제외). 옮긴 적 없는 물체는 없다 */
+/** 옮긴 물체 하나의 최종 값 (objectId 제외). 옮긴 적 없는 물체는 없다 */
 export type ObjectLook = Omit<ObjectMove, "objectId">;
 
-/** 어느 큐 시점의 무대 전체 상태 */
+/** 어느 지정 포인트 시점의 무대 상태 */
 export type Look = {
+  /** 이 포인트에서 지정된 인물만. 지정 안 된 인물은 배우 재량이라 없다 */
   characters: Record<string, CharacterLook>;
   objects: Record<string, ObjectLook>;
 };
@@ -21,36 +22,35 @@ function merge<T extends object>(prev: T | undefined, next: T): T {
 }
 
 /**
- * 트래킹 방식으로 큐 시점의 최종 상태를 계산한다.
- * 큐 순서는 작품(Project)에서, 큐마다 바뀌는 값은 배치(Staging)에서 가져온다.
+ * 지정 포인트 시점의 무대 상태를 계산한다.
+ * - 인물: 이 포인트에 적힌 인물만. 이전 포인트에서 이어받지 않는다
+ * - 물체: 처음부터 이 포인트까지 옮긴 것을 차례로 쌓는다(트래킹)
  */
-export function resolveCue(project: Project, staging: Staging, cueId: string): Look {
-  const index = project.cues.findIndex((c) => c.id === cueId);
-  if (index < 0) throw new Error(`큐 '${cueId}'가 없음`);
+export function resolveMark(project: Project, staging: Staging, markId: string): Look {
+  const index = project.marks.findIndex((m) => m.id === markId);
+  if (index < 0) throw new Error(`지정 포인트 '${markId}'가 없음`);
 
-  const valuesByCue = new Map(staging.cues.map((v) => [v.cueId, v]));
+  const valuesByMark = new Map(staging.marks.map((v) => [v.markId, v]));
   const look: Look = { characters: {}, objects: {} };
-  for (const cue of project.cues.slice(0, index + 1)) {
-    const values = valuesByCue.get(cue.id);
-    if (!values) continue;
-    for (const { characterId, ...rest } of values.blocking) {
-      look.characters[characterId] = merge(look.characters[characterId], rest);
-    }
-    for (const { objectId, ...rest } of values.objects) {
+  for (const mark of project.marks.slice(0, index + 1)) {
+    for (const { objectId, ...rest } of valuesByMark.get(mark.id)?.objects ?? []) {
       look.objects[objectId] = merge(look.objects[objectId], rest);
     }
+  }
+  for (const { characterId, ...rest } of valuesByMark.get(markId)?.blocking ?? []) {
+    look.characters[characterId] = rest;
   }
   return look;
 }
 
-/** 다음 큐 id. 마지막이면 null. */
-export function nextCueId(project: Project, cueId: string): string | null {
-  const i = project.cues.findIndex((c) => c.id === cueId);
-  return project.cues[i + 1]?.id ?? null;
+/** 다음 지정 포인트 id. 마지막이면 null. */
+export function nextMarkId(project: Project, markId: string): string | null {
+  const i = project.marks.findIndex((m) => m.id === markId);
+  return project.marks[i + 1]?.id ?? null;
 }
 
-/** 이전 큐 id. 처음이면 null. */
-export function prevCueId(project: Project, cueId: string): string | null {
-  const i = project.cues.findIndex((c) => c.id === cueId);
-  return i > 0 ? (project.cues[i - 1]?.id ?? null) : null;
+/** 이전 지정 포인트 id. 처음이면 null. */
+export function prevMarkId(project: Project, markId: string): string | null {
+  const i = project.marks.findIndex((m) => m.id === markId);
+  return i > 0 ? (project.marks[i - 1]?.id ?? null) : null;
 }

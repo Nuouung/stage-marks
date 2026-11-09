@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { characterHeight, Project, Stage, Staging } from "../src/model";
-import { resolveCue } from "../src/player";
+import { resolveMark } from "../src/player";
 import { composeStage } from "../src/stage/compose";
 import { describeActingArea, describeCharacters, describeStage, floorHeightAt } from "../src/view/stage3d/shapes";
 import bonomaru from "../data/stages/bonomaru.json";
@@ -38,30 +38,28 @@ describe("인물 그리기", () => {
     expect(floorHeightAt(c, top.position.x, top.position.z)).toBeCloseTo(Math.max(...tops));
   });
 
-  it("무대에 나와 있는 인물만 그려진다", () => {
+  it("지정된 인물만 그려진다", () => {
     const c = composed({});
-    const look = resolveCue(project, staging, project.cues[0]!.id);
-    const onStage = Object.values(look.characters).filter((l) => l.onStage).length;
-    expect(describeCharacters(c, project, look.characters)).toHaveLength(onStage);
+    const look = resolveMark(project, staging, project.marks[0]!.id);
+    expect(describeCharacters(c, project, look.characters)).toHaveLength(Object.keys(look.characters).length);
   });
 
   it("인물은 키와 자세를 가진 사람 모형으로 그려진다", () => {
     const c = composed({});
     const ch = project.characters[0]!;
-    const fig = describeCharacters(c, project, { [ch.id]: { x: 0, z: 1, posture: "stand", onStage: true } })[0]!;
+    const fig = describeCharacters(c, project, { [ch.id]: { x: 0, z: 1, facing: 0, posture: "stand" } })[0]!;
     expect(fig).toMatchObject({ kind: "figure", size: { y: characterHeight(ch) }, pose: "stand" });
   });
 
-  it("프리셋에서는 무대에 아무도 없다", () => {
-    const look = resolveCue(project, staging, project.cues[0]!.id);
-    expect(describeCharacters(composed({}), project, look.characters)).toHaveLength(0);
+  it("지정된 인물이 없으면 아무도 그려지지 않는다", () => {
+    expect(describeCharacters(composed({}), project, {})).toHaveLength(0);
   });
 });
 
 describe("그릴 것 목록의 id", () => {
   it("물체마다 id가 달라 이전 무대와 비교할 수 있다", () => {
     const c = composed({ "draw-2": true });
-    const look = resolveCue(project, staging, "cue-1");
+    const look = resolveMark(project, staging, "mark-3");
     const shapes = [...describeStage(c), ...describeActingArea(staging.actingArea), ...describeCharacters(c, project, look.characters)];
     expect(new Set(shapes.map((s) => s.id)).size).toBe(shapes.length);
   });

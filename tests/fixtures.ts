@@ -1,18 +1,21 @@
 import type { Project, Staging } from "../src/model";
 
-/** 테스트용 작은 작품. 인물 p 하나, 큐 3개. */
+/** 테스트용 작은 작품. 인물 p 하나, 장 2개, 지정 포인트 3개. */
 export function tinyProject(): Project {
   return {
     id: "tiny",
     title: "테스트",
     objects: [{ id: "box", name: "상자", kind: "platform", size: { x: 1, y: 0.4, z: 1 } }],
     characters: [{ id: "p", role: "판사", label: "판사" }],
-    scenes: [],
+    scenes: [
+      { id: "a", name: "1장" },
+      { id: "b", name: "2장" },
+    ],
     dataVersion: "test",
-    cues: [
-      { id: "q1", number: 1, label: "1", fadeIn: 3 },
-      { id: "q2", number: 2, label: "2", fadeIn: 3 },
-      { id: "q3", number: 3, label: "3", fadeIn: 3 },
+    marks: [
+      { id: "m1", sceneId: "a", title: "1" },
+      { id: "m2", sceneId: "a", title: "2" },
+      { id: "m3", sceneId: "b", title: "3" },
     ],
   };
 }
@@ -29,14 +32,10 @@ export function tinyStaging(): Staging {
     notes: [],
     placements: [{ objectId: "box", position: { x: 0, y: 0, z: 3 }, rotation: 0, tipped: false }],
     dataVersion: "test",
-    cues: [
-      {
-        cueId: "q1",
-        blocking: [{ characterId: "p", x: 0, z: 2, posture: "sit", onStage: true }],
-        objects: [],
-      },
-      { cueId: "q2", blocking: [], objects: [{ objectId: "box", position: { x: 1, y: 0, z: 2 }, tipped: true }] },
-      { cueId: "q3", blocking: [{ characterId: "p", posture: "stand" }], objects: [{ objectId: "box", tipped: false }] },
+    marks: [
+      { markId: "m1", blocking: [{ characterId: "p", x: 0, z: 2, facing: 0, posture: "sit" }], objects: [] },
+      { markId: "m2", blocking: [], objects: [{ objectId: "box", position: { x: 1, y: 0, z: 2 }, tipped: true }] },
+      { markId: "m3", blocking: [{ characterId: "p", x: 1, z: 1, facing: 0, posture: "stand" }], objects: [{ objectId: "box", tipped: false }] },
     ],
   };
 }

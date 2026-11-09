@@ -35,9 +35,19 @@ describe("인물 모형 파일", () => {
 
 describe("작품 데이터", () => {
   for (const { file, data: project } of projects) {
-    it(`${file}: 큐가 가리키는 장이 모두 존재한다`, () => {
+    it(`${file}: 지정 포인트가 가리키는 장이 모두 존재한다`, () => {
       const sceneIds = new Set(project.scenes.map((s) => s.id));
-      for (const cue of project.cues) if (cue.sceneId) expect(sceneIds, `${cue.id}의 장`).toContain(cue.sceneId);
+      for (const m of project.marks) expect(sceneIds, `${m.id}의 장`).toContain(m.sceneId);
+    });
+
+    it(`${file}: 지정 포인트가 장 순서대로 놓여 있다`, () => {
+      const order = project.marks.map((m) => project.scenes.findIndex((s) => s.id === m.sceneId));
+      expect(order).toEqual([...order].sort((a, b) => a - b));
+    });
+
+    it(`${file}: 지정 포인트 id가 겹치지 않는다`, () => {
+      const ids = project.marks.map((m) => m.id);
+      expect(new Set(ids).size).toBe(ids.length);
     });
 
     it(`${file}: 인물 id가 겹치지 않는다`, () => {
@@ -45,10 +55,6 @@ describe("작품 데이터", () => {
       expect(new Set(ids).size).toBe(ids.length);
     });
 
-    it(`${file}: 큐 번호가 오름차순이다`, () => {
-      const nums = project.cues.map((c) => c.number);
-      expect(nums).toEqual([...nums].sort((a, b) => a - b));
-    });
   }
 });
 
@@ -110,14 +116,21 @@ describe("배치 데이터", () => {
       }
     });
 
-    it(`${file}: 큐 값이 가리키는 큐·인물·물체가 모두 존재한다`, () => {
-      const cueIds = new Set(project?.cues.map((c) => c.id));
+    it(`${file}: 지정 포인트 값이 가리키는 포인트·인물·물체가 모두 존재한다`, () => {
+      const markIds = new Set(project?.marks.map((m) => m.id));
       const characterIds = new Set(project?.characters.map((c) => c.id));
       const objectIds = new Set(project?.objects.map((o) => o.id));
-      for (const v of staging.cues) {
-        expect(cueIds, `큐 ${v.cueId}`).toContain(v.cueId);
-        for (const b of v.blocking) expect(characterIds, `${v.cueId}의 인물`).toContain(b.characterId);
-        for (const o of v.objects) expect(objectIds, `${v.cueId}의 물체`).toContain(o.objectId);
+      for (const v of staging.marks) {
+        expect(markIds, `포인트 ${v.markId}`).toContain(v.markId);
+        for (const b of v.blocking) expect(characterIds, `${v.markId}의 인물`).toContain(b.characterId);
+        for (const o of v.objects) expect(objectIds, `${v.markId}의 물체`).toContain(o.objectId);
+      }
+    });
+
+    it(`${file}: 한 포인트에 같은 인물을 두 번 적지 않는다`, () => {
+      for (const v of staging.marks) {
+        const ids = v.blocking.map((b) => b.characterId);
+        expect(new Set(ids).size, v.markId).toBe(ids.length);
       }
     });
   }

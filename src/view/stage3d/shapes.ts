@@ -102,20 +102,20 @@ export function floorHeightAt(composed: ComposedStage, x: number, z: number): nu
   return h;
 }
 
-/** 무대에 있는 인물을 사람 모형으로. 키·자세·방향을 넘기고, 모양은 렌더러가 만든다. */
+/** 지정된 인물을 사람 모형으로. 키·자세·방향을 넘기고, 모양은 렌더러가 만든다. */
 export function describeCharacters(composed: ComposedStage, project: Project, looks: Record<string, CharacterLook>): Shape[] {
   const shapes: Shape[] = [];
   for (const c of project.characters) {
     const look = looks[c.id];
-    if (!look?.onStage || look.x === undefined || look.z === undefined) continue;
+    if (!look) continue;
     shapes.push({
       id: `char-${c.id}`,
       group: "character",
       kind: "figure",
       position: { x: look.x, y: floorHeightAt(composed, look.x, look.z), z: look.z },
       size: { x: 0.45, y: characterHeight(c), z: 0.3 },
-      rotationY: look.facing ?? 0,
-      pose: look.posture ?? "stand",
+      rotationY: look.facing,
+      pose: look.posture,
       color: c.color ?? "#d9c2a8",
       avatar: c.avatar ?? DEFAULT_AVATAR,
       label: c.label,

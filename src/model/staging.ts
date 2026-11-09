@@ -18,21 +18,20 @@ export const Placement = z.object({
 });
 export type Placement = z.infer<typeof Placement>;
 
-/** 큐에서 인물 한 명의 위치·자세. 적지 않은 항목은 이전 큐 값을 따른다(트래킹). */
-export const Blocking = z.object({
+/** 지정 포인트에서 인물 한 명의 위치·자세. 여기 적힌 인물만 화면에 나온다(지정 안 된 인물은 배우 재량). */
+export const Blocking = z.strictObject({
   characterId: Id,
   /** 바닥 위치 (x, z). 단상 위면 높이는 물체에서 계산 */
-  x: z.number().optional(),
-  z: z.number().optional(),
+  x: z.number(),
+  z: z.number(),
   /** 바라보는 방향(도). 0 = 객석 정면 */
-  facing: z.number().optional(),
-  posture: z.enum(["stand", "sit"]).optional(),
-  onStage: z.boolean().optional(),
+  facing: z.number().default(0),
+  posture: z.enum(["stand", "sit"]).default("stand"),
 });
 export type Blocking = z.infer<typeof Blocking>;
 
-/** 큐에서 세트 물체를 옮긴 것. 적지 않은 항목은 이전 값을 따른다(트래킹). */
-export const ObjectMove = z.object({
+/** 지정 포인트에서 세트 물체를 옮긴 것. 적지 않은 항목은 이전 값을 따른다(트래킹) — 옮긴 물체는 다시 옮길 때까지 그 자리에 있다. */
+export const ObjectMove = z.strictObject({
   objectId: Id,
   position: Vec3.optional(),
   rotation: z.number().optional(),
@@ -40,13 +39,13 @@ export const ObjectMove = z.object({
 });
 export type ObjectMove = z.infer<typeof ObjectMove>;
 
-/** 작품의 큐 하나에 대해, 이 공연장에서 바뀌는 인물 위치·물체 위치. 바뀐 것만 적는다. */
-export const CueValues = z.object({
-  cueId: Id,
+/** 작품의 지정 포인트 하나에 대해, 이 공연장에서의 인물 위치와 옮긴 물체. */
+export const MarkValues = z.strictObject({
+  markId: Id,
   blocking: z.array(Blocking).default([]),
   objects: z.array(ObjectMove).default([]),
 });
-export type CueValues = z.infer<typeof CueValues>;
+export type MarkValues = z.infer<typeof MarkValues>;
 
 export const Staging = z.object({
   id: Id,
@@ -60,8 +59,8 @@ export const Staging = z.object({
   actingArea: z.object({ width: z.number().positive(), depth: z.number().positive() }),
   /** 놓지 않은 물체는 무대에 나오지 않는다 */
   placements: z.array(Placement),
-  /** 큐마다 바뀌는 값. 아무것도 안 바뀌는 큐는 빠져도 된다 */
-  cues: z.array(CueValues).default([]),
+  /** 지정 포인트마다의 값 */
+  marks: z.array(MarkValues).default([]),
   /** 아직 현장에서 확인 안 된 값에 대한 메모 */
   notes: z.array(z.string()).default([]),
   dataVersion: z.string(),

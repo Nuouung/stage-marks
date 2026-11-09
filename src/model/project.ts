@@ -3,7 +3,7 @@ import { Id, Vec3 } from "./common";
 
 /**
  * 작품(Project): 공연장이 바뀌어도 그대로 가져가는 것.
- * 대본·인물·장·세트 정의·큐 목록. 좌표처럼 공연장마다 달라지는 건 넣지 않는다(→ Staging).
+ * 인물·장·세트 정의·지정 포인트 목록. 좌표처럼 공연장마다 달라지는 건 넣지 않는다(→ Staging).
  */
 
 /** 세트 물체의 정의 (트럭에 싣고 다니는 것). 어디 놓을지는 Staging에서 정한다. 박스로 단순화. */
@@ -42,32 +42,36 @@ export const Character = z.object({
 });
 export type Character = z.infer<typeof Character>;
 
-/** 장. 큐를 담는 상자가 아니라 이름표 목록. 큐가 sceneId로 가리킨다. 공연 순서대로 적는다. */
+/** 장. 공연 순서대로 적는다. 지정 포인트가 sceneId로 가리킨다. */
 export const Scene = z.object({ id: Id, name: z.string() });
 export type Scene = z.infer<typeof Scene>;
 
-/** 큐 목록의 한 줄. 공연장과 무관한 정보만. 이 큐에서 인물·물체가 어떻게 되는지는 Staging에. */
-export const Cue = z.object({
+/**
+ * 지정 포인트: 연출이 동선을 정해 둔 순간 하나. 공연장과 무관한 정보만 적는다.
+ * 그 순간 누가 어디에 서는지는 공연장마다 다르므로 Staging에 적는다.
+ * 지정하지 않은 순간·인물은 배우 재량이라 데이터에 없다.
+ */
+export const Mark = z.strictObject({
   id: Id,
-  /** 큐 번호. 소수 허용(12.5) */
-  number: z.number().nonnegative(),
-  label: z.string(),
-  /** 이 큐로 넘어올 때 걸리는 시간(초) */
-  fadeIn: z.number().nonnegative(),
-  /** 이 큐가 속한 장 */
-  sceneId: Id.optional(),
+  /** 이 포인트가 속한 장 */
+  sceneId: Id,
+  /** 짧은 이름. 예: "돈결: 뭐라고요?" */
+  title: z.string(),
+  /** 언제인지. 대사나 소리 기준. 예: "남자 '왜 대답을 못해!'" */
+  when: z.string().optional(),
+  /** 왜 이 동선인지, 배우에게 전할 말 */
   note: z.string().optional(),
 });
-export type Cue = z.infer<typeof Cue>;
+export type Mark = z.infer<typeof Mark>;
 
 export const Project = z.object({
   id: Id,
   title: z.string(),
   objects: z.array(StageObject),
   characters: z.array(Character),
-  scenes: z.array(Scene).default([]),
-  /** 공연 전체 큐를 한 줄로. 큐 번호 순서대로 정렬돼 있어야 함 */
-  cues: z.array(Cue),
+  scenes: z.array(Scene),
+  /** 지정 포인트를 공연 순서대로. 장 순서와 맞아야 한다 */
+  marks: z.array(Mark),
   dataVersion: z.string(),
 });
 export type Project = z.infer<typeof Project>;
