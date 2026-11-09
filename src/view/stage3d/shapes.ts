@@ -34,6 +34,8 @@ const CURTAIN_THICK = 0.08;
 const BLACK = "#202022";
 /** 앤틱 가구 색 (짙은 월넛) */
 const WALNUT = "#6b4128";
+/** 무대 바닥 격자선 색. 바닥보다 살짝 밝게 */
+const GRID_COLOR = "#66666c";
 /** 열린 막이 양옆에 모여 있는 폭(m) */
 const GATHERED = 1.0;
 
@@ -62,6 +64,15 @@ export function describeStage(composed: ComposedStage): Shape[] {
     }
   }
 
+  // 바닥 1m 격자: 거리감 잡기용. 무대 바닥 안에만 그린다
+  const LINE = 0.012;
+  for (let x = Math.ceil(-W / 2); x <= Math.floor(W / 2); x++) {
+    shapes.push({ id: `grid-x${x}`, group: "guide", kind: "box", position: { x, y: 0.001, z: D / 2 }, size: { x: LINE, y: 0.002, z: D }, color: GRID_COLOR });
+  }
+  for (let z = 1; z < D; z++) {
+    shapes.push({ id: `grid-z${z}`, group: "guide", kind: "box", position: { x: 0, y: 0.001, z }, size: { x: W, y: 0.002, z: LINE }, color: GRID_COLOR });
+  }
+
   for (const o of objects) {
     const base = { id: o.id, group: "object" as const, position: o.position, size: o.size, rotationY: o.rotation, label: o.name };
     if (o.kind === "desk") shapes.push({ ...base, kind: "table", color: WALNUT });
@@ -72,8 +83,9 @@ export function describeStage(composed: ComposedStage): Shape[] {
   return shapes;
 }
 
-const STEP_COLOR = "#1c1c1f";
-const SEAT_COLOR = "#3e2427";
+const HOUSE_FLOOR = "#2b2622";
+const STEP_COLOR = "#3a3430";
+const SEAT_COLOR = "#6a2e32";
 
 /**
  * 객석을 계단 단과 좌석 상자로. 거리감용 대략 모양이다.
@@ -82,6 +94,10 @@ const SEAT_COLOR = "#3e2427";
 export function describeHouse(house: House): Shape[] {
   const shapes: Shape[] = [];
   const w = house.seatWidth;
+  const widest = Math.max(...house.rows.map((r) => r.blocks.reduce((a, b) => a + b, 0) * w + (r.blocks.length - 1) * house.aisleWidth));
+  const back = house.frontZ - house.rowPitch * house.rows.length;
+  // 객석 바닥: 무대 앞끝부터 맨 뒷열까지
+  shapes.push({ id: "house-floor", group: "house", kind: "box", position: { x: 0, y: -0.02, z: back / 2 }, size: { x: widest + 1.6, y: 0.02, z: -back }, color: HOUSE_FLOOR });
   house.rows.forEach((row, i) => {
     const seats = row.blocks.reduce((a, b) => a + b, 0);
     const rowWidth = seats * w + (row.blocks.length - 1) * house.aisleWidth;

@@ -25,9 +25,11 @@ const VIEWS: Record<ViewName, { eye: [number, number, number]; target: [number, 
 export function createRenderer(canvas: HTMLCanvasElement) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color("#050608");
+  // 무대와 객석 밖은 어둡게 두어 두 공간에 눈이 가게 한다
+  scene.background = new THREE.Color("#000000");
 
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
   const controls = new OrbitControls(camera, canvas);
@@ -43,23 +45,12 @@ export function createRenderer(canvas: HTMLCanvasElement) {
   // 다른 탭에 다녀오면 화면 내용이 지워질 수 있다
   document.addEventListener("visibilitychange", invalidate);
 
-  // 무대 전체를 고르게 밝히는 빛. 무대 조명은 다루지 않는다
-  const hemi = new THREE.HemisphereLight("#ffffff", "#202020", 0.9);
+  // 하우스 조명이 켜진 극장처럼 무대와 객석을 따뜻하고 고르게 밝힌다. 무대 조명은 다루지 않는다
+  const hemi = new THREE.HemisphereLight("#fff3e2", "#3a322a", 1.25);
   scene.add(hemi);
-  const work = new THREE.DirectionalLight("#ffffff", 0.6);
+  const work = new THREE.DirectionalLight("#ffe9cc", 0.9);
   work.position.copy(toThree(2, 10, -6));
   scene.add(work);
-
-  // 객석 바닥 (무대 앞 공간)
-  const house = new THREE.Mesh(new THREE.PlaneGeometry(14, 16), new THREE.MeshStandardMaterial({ color: "#0a0a0a" }));
-  house.rotation.x = -Math.PI / 2;
-  house.position.copy(toThree(0, -0.03, -8));
-  scene.add(house);
-
-  // 바닥 1m 격자: 거리 감 잡기용
-  const grid = new THREE.GridHelper(20, 20, "#3a3a3a", "#202020");
-  grid.position.copy(toThree(0, 0.001, 5));
-  scene.add(grid);
 
   const layer = new THREE.Group();
   scene.add(layer);
