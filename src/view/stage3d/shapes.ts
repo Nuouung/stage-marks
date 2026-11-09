@@ -17,7 +17,7 @@ export type Shape = {
   /** 바라보는 방향(도). 0 = 객석 정면 */
   rotationY?: number;
   /** figure 전용: 서 있음 / 앉음 */
-  pose?: "stand" | "sit" | "floor";
+  pose?: "stand" | "sit" | "floor" | "crouch";
   /** 흐리게 그린다(자유동선 인물) */
   ghost?: boolean;
   /** figure 전용: 인물 모형 */

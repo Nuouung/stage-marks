@@ -75,6 +75,8 @@ export function renderControls(root: HTMLElement, p: ControlsProps, h: ControlsH
     <section class="row"><span>표시</span><button data-guide="acting" class="${p.showActingArea ? "on" : ""}">연기 공간 ${p.showActingArea ? "켬" : "끔"}</button></section>
   `;
 
+  // 장 버튼이 한 줄로 길어지므로 지금 장이 보이게 가로로 옮긴다
+  root.querySelector<HTMLButtonElement>(".scenes .on")?.scrollIntoView({ block: "nearest", inline: "center" });
   root.querySelectorAll<HTMLButtonElement>("[data-mark]").forEach((b) =>
     b.addEventListener("click", () => {
       const next = p.marks[index + (b.dataset.mark === "next" ? 1 : -1)];

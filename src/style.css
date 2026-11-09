@@ -10,7 +10,8 @@ html, body { margin: 0; height: 100%; background: #000; color: #eee; font-family
 #controls button { font: inherit; padding: 7px 11px; border-radius: 8px; border: 1px solid #333; background: #1e1e1e; color: #eee; }
 #controls button.on { background: #5dcaa5; color: #062b22; border-color: #5dcaa5; }
 #controls button:disabled { opacity: 0.35; }
-#controls .scenes { margin: 0 0 8px; }
+#controls .scenes { margin: 0 0 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+#controls .scenes button { flex: none; }
 #controls .mark { display: flex; align-items: center; gap: 8px; }
 #controls .mark-body { flex: 1; min-width: 0; }
 #controls .mark-title { font-weight: 600; }

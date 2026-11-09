@@ -26,8 +26,8 @@ export const Blocking = z.strictObject({
   z: z.number(),
   /** 바라보는 방향(도). 0 = 객석 정면 */
   facing: z.number().default(0),
-  /** stand 서기, sit 의자에 앉기, floor 바닥에 앉기 */
-  posture: z.enum(["stand", "sit", "floor"]).default("stand"),
+  /** stand 서기, sit 의자에 앉기, floor 바닥에 앉기, crouch 쪼그려 앉기·웅크리기 */
+  posture: z.enum(["stand", "sit", "floor", "crouch"]).default("stand"),
   /** 무대에는 있지만 자유동선. 위치는 대략 이쯤이라는 참고값이고, 화면에 흐리게 나온다 */
   free: z.boolean().default(false),
 });

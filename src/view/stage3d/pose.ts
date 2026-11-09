@@ -41,6 +41,21 @@ export const POSES = {
     LeftUpLeg: [90, 0, 0],
     RightUpLeg: [90, 0, 0],
   },
+  /** 쪼그려 앉기·웅크리기: 무릎을 가슴 쪽으로 접고 팔로 감싼다 */
+  crouch: {
+    Spine: [28, 0, 0],
+    Neck: [10, 0, 0],
+    LeftArm: [45, 0, ARM_DOWN],
+    LeftForeArm: [85, -35, ARM_DOWN],
+    LeftHand: [85, -35, ARM_DOWN],
+    RightArm: [45, 0, -ARM_DOWN],
+    RightForeArm: [85, 35, -ARM_DOWN],
+    RightHand: [85, 35, -ARM_DOWN],
+    LeftUpLeg: [125, 0, 8],
+    LeftLeg: [-30, 0, 4],
+    RightUpLeg: [125, 0, -8],
+    RightLeg: [-30, 0, -4],
+  },
   /** 바닥에 앉기: 다리를 앞으로 뻗고 손은 몸 뒤 바닥을 짚는다 */
   floor: {
     Spine: [-10, 0, 0],
