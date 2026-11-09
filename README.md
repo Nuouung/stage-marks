@@ -1,8 +1,8 @@
-# stage-light-previz
+# stage-marks
 
 배우에게 공유하는 조명 계획 시각화 도구. 공연장과 공연을 합성한 3D 무대에서 큐별 조명의 느낌과 인물 위치를 보여 준다. 정밀한 조명 설계는 Capture에서 한다.
 
-**화면:** https://nuouung.github.io/stage-light-previz/ (main) · https://nuouung.github.io/stage-light-previz/develop/ (develop)
+**화면:** https://nuouung.github.io/stage-marks/ (main) · https://nuouung.github.io/stage-marks/develop/ (develop)
 
 설계·결정 기록은 드라이브 베이스캠프(`조명 시뮬레이터` 폴더)에 있다. 이 저장소에는 코드와 데이터만 둔다.
 

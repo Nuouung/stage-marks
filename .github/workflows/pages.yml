@@ -1,8 +1,8 @@
 name: 배포 (깃허브 페이지)
 
 # 사이트 하나에 두 브랜치를 함께 올린다.
-#   main    → /stage-light-previz/
-#   develop → /stage-light-previz/develop/
+#   main    → /stage-marks/
+#   develop → /stage-marks/develop/
 # 배포 환경(github-pages)은 main에서만 배포를 허용하므로, develop에 올리면 main에서 이 워크플로를 다시 실행한다.
 on:
   push:
