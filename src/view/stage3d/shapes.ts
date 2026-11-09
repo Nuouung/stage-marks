@@ -1,4 +1,4 @@
-import { characterHeight, DEFAULT_AVATAR, type Avatar, type Project } from "../../model";
+import { characterHeight, DEFAULT_AVATAR, type Avatar, type House, type Project } from "../../model";
 import type { CharacterLook } from "../../player";
 import type { ComposedStage } from "../../stage/compose";
 
@@ -8,7 +8,7 @@ import type { ComposedStage } from "../../stage/compose";
  */
 export type Shape = {
   id: string;
-  group: "floor" | "wall" | "curtain" | "object" | "character" | "guide";
+  group: "floor" | "wall" | "curtain" | "object" | "character" | "guide" | "house";
   /** table·chair·figure는 모양을 렌더러가 만든다 */
   kind: "box" | "figure" | "table" | "chair";
   position: { x: number; y: number; z: number };
@@ -69,6 +69,44 @@ export function describeStage(composed: ComposedStage): Shape[] {
     else if (o.kind === "platform") shapes.push({ ...base, kind: "box", color: "#4a4a4e", outline: true });
     else shapes.push({ ...base, kind: "box", color: "#7a5535" });
   }
+  return shapes;
+}
+
+const STEP_COLOR = "#1c1c1f";
+const SEAT_COLOR = "#3e2427";
+
+/**
+ * 객석을 계단 단과 좌석 상자로. 거리감용 대략 모양이다.
+ * 열마다 좌석 덩어리를 통로 폭만큼 띄워 가운데 정렬한다. 객석에서 볼 때 왼쪽 = 하수(-x).
+ */
+export function describeHouse(house: House): Shape[] {
+  const shapes: Shape[] = [];
+  const w = house.seatWidth;
+  house.rows.forEach((row, i) => {
+    const seats = row.blocks.reduce((a, b) => a + b, 0);
+    const rowWidth = seats * w + (row.blocks.length - 1) * house.aisleWidth;
+    const zMid = house.frontZ - house.rowPitch * (i + 0.5);
+    const floor = house.rowRise * (i + 1);
+    shapes.push({ id: `house-step-${row.label}`, group: "house", kind: "box", position: { x: 0, y: 0, z: zMid }, size: { x: rowWidth + 0.4, y: floor, z: house.rowPitch }, color: STEP_COLOR });
+    let x = -rowWidth / 2;
+    let n = 0;
+    row.blocks.forEach((count, b) => {
+      if (b > 0) x += house.aisleWidth;
+      for (let k = 0; k < count; k++) {
+        n += 1;
+        shapes.push({
+          id: `seat-${row.label}-${String(n).padStart(2, "0")}`,
+          group: "house",
+          kind: "box",
+          // 좌석은 단의 객석 쪽(무대에서 먼 쪽)에 붙여 앞에 다리 공간을 남긴다
+          position: { x: x + w / 2, y: floor, z: zMid - house.rowPitch * 0.15 },
+          size: { x: w * 0.86, y: 0.8, z: house.rowPitch * 0.5 },
+          color: SEAT_COLOR,
+        });
+        x += w;
+      }
+    });
+  });
   return shapes;
 }
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { characterHeight, Project, Stage, Staging } from "../src/model";
 import { resolveMark } from "../src/player";
 import { composeStage } from "../src/stage/compose";
-import { describeActingArea, describeCharacters, describeStage, floorHeightAt } from "../src/view/stage3d/shapes";
+import { describeActingArea, describeCharacters, describeHouse, describeStage, floorHeightAt } from "../src/view/stage3d/shapes";
 import bonomaru from "../data/stages/bonomaru.json";
 import bodojichim from "../data/projects/bodojichim.json";
 import bodojichimBonomaru from "../data/stagings/bodojichim-bonomaru.json";
@@ -87,5 +87,29 @@ describe("연기 공간 표시", () => {
     expect(right.position.x + right.size.x / 2).toBeCloseTo(3.5);
     const back = tapes.find((s) => s.id === "acting-back")!;
     expect(back.position.z + back.size.z / 2).toBeCloseTo(5);
+  });
+});
+
+describe("객석", () => {
+  const house = stage.house!;
+
+  it("보노마루 객석은 좌석배치도대로 11열 149석이다", () => {
+    const seats = describeHouse(house).filter((s) => s.id.startsWith("seat-"));
+    expect(house.rows).toHaveLength(11);
+    expect(seats).toHaveLength(149);
+  });
+
+  it("객석은 무대 앞(객석 쪽)에 있고, 뒷열일수록 높다", () => {
+    const shapes = describeHouse(house);
+    for (const s of shapes) expect(s.position.z + s.size.z / 2).toBeLessThanOrEqual(0);
+    const steps = shapes.filter((s) => s.id.startsWith("house-step-"));
+    for (let i = 1; i < steps.length; i++) expect(steps[i]!.size.y).toBeGreaterThan(steps[i - 1]!.size.y);
+  });
+
+  it("좌석 id는 열과 번호로 겹치지 않는다", () => {
+    const ids = describeHouse(house).map((s) => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).toContain("seat-A-14");
+    expect(ids).toContain("seat-B-13");
   });
 });

@@ -6,7 +6,7 @@ import { composeStage, moveObjects } from "./stage/compose";
 import { createStore } from "./store/store";
 import { loadAvatar } from "./view/stage3d/avatar";
 import { createRenderer, type ViewName } from "./view/stage3d/renderer";
-import { describeActingArea, describeCharacters, describeStage } from "./view/stage3d/shapes";
+import { describeActingArea, describeCharacters, describeHouse, describeStage } from "./view/stage3d/shapes";
 import { renderControls } from "./view/ui/controls";
 import projectJson from "../data/projects/bodojichim.json";
 import stageJson from "../data/stages/bonomaru.json";
@@ -29,8 +29,9 @@ const controlsRoot = document.getElementById("controls")!;
 function render(s: AppState) {
   const look = s.markId ? resolveMark(s.project, s.staging, s.markId) : { characters: {}, objects: {} };
   const composed = moveObjects(composeStage(s.stage, s.project, s.staging), look.objects);
+  const house = s.stage.house ? describeHouse(s.stage.house) : [];
   const guides = s.showActingArea ? describeActingArea(s.staging.actingArea) : [];
-  renderer.draw([...describeStage(composed), ...guides, ...describeCharacters(composed, s.project, look.characters)]);
+  renderer.draw([...describeStage(composed), ...house, ...guides, ...describeCharacters(composed, s.project, look.characters)]);
   renderControls(
     controlsRoot,
     { title: `${s.project.title} · ${s.stage.venue}`, dataVersion: s.staging.dataVersion, scenes: s.project.scenes, marks: s.project.marks, currentMarkId: s.markId, designated: s.project.characters.filter((c) => look.characters[c.id]), curtains: composed.curtains, view: s.view, showActingArea: s.showActingArea },
