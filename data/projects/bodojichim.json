@@ -393,6 +393,10 @@
   ],
   "scenes": [
     {
+      "id": "scene-0",
+      "name": "0장"
+    },
+    {
       "id": "scene-1",
       "name": "1장"
     },
@@ -405,7 +409,7 @@
       "name": "3장 · 연극반"
     }
   ],
-  "dataVersion": "2026-11-09.1",
+  "dataVersion": "2026-11-09.2",
   "marks": [
     {
       "id": "mark-1",

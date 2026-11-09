@@ -10,7 +10,7 @@
     "border-head"
   ],
   "actingArea": {
-    "width": 8,
+    "width": 9,
     "depth": 5
   },
   "placements": [
@@ -267,7 +267,7 @@
     {
       "objectId": "desk-right",
       "position": {
-        "x": 2.8,
+        "x": 3.3,
         "y": 0,
         "z": 1.5
       },
@@ -277,7 +277,7 @@
     {
       "objectId": "chair-right-1",
       "position": {
-        "x": 2.89,
+        "x": 3.39,
         "y": 0,
         "z": 2.26
       },
@@ -287,7 +287,7 @@
     {
       "objectId": "chair-right-2",
       "position": {
-        "x": 3.22,
+        "x": 3.72,
         "y": 0,
         "z": 1.92
       },
@@ -297,7 +297,7 @@
     {
       "objectId": "chair-right-3",
       "position": {
-        "x": 3.56,
+        "x": 4.06,
         "y": 0,
         "z": 1.59
       },
@@ -307,7 +307,7 @@
     {
       "objectId": "desk-left",
       "position": {
-        "x": -2.8,
+        "x": -3.3,
         "y": 0,
         "z": 1.5
       },
@@ -317,7 +317,7 @@
     {
       "objectId": "chair-left-1",
       "position": {
-        "x": -3.22,
+        "x": -3.72,
         "y": 0,
         "z": 1.92
       },
@@ -345,11 +345,11 @@
       "tipped": true
     }
   ],
-  "dataVersion": "2026-11-09.1",
+  "dataVersion": "2026-11-09.2",
   "notes": [
     "단·책상·의자 위치는 공연장 방문 전 가정. 현장에서 바뀔 가능성 큼",
     "상수·하수 책상은 서로 마주 보되 객석 쪽으로 45도 열림. 의자는 책상 바깥쪽",
-    "연기 공간 = 폭 8m × 깊이 5m. 책상·의자는 모두 이 안. 두 책상 사이 가장 좁은 폭 약 4.1m",
+    "연기 공간 = 폭 9m × 깊이 5m (앞쪽 다리막 안쪽 9.31m 이내). 책상·의자는 모두 이 안. 두 책상 사이 가장 좁은 폭 약 5.1m",
     "덧마루 한 장 두께 약 14.5cm는 사진으로 추정한 값 (4층 윗면 58cm)",
     "단 시안: 4층 계단형. 1층 폭 6.06m는 무대 중앙에 대칭, 2~4층 왼쪽 끝은 1층 왼쪽 끝에서 1.82m 지점의 기준선에 맞춤. 3×6 = 0.91m, 2×6 = 0.606m, 1×6 = 0.303m, 깊이 1.82m",
     "엎어진 의자(상수)는 단 위 빈 폭이 좁아 단 옆 바닥으로 옮김. 판사 책상·의자는 4층 위.",
@@ -401,28 +401,28 @@
       "blocking": [
         {
           "characterId": "juhyuk",
-          "x": 2.89,
+          "x": 3.39,
           "z": 2.26,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "jeongbae",
-          "x": 3.22,
+          "x": 3.72,
           "z": 1.92,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "seunguk",
-          "x": 3.56,
+          "x": 4.06,
           "z": 1.59,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "dongyeol",
-          "x": -3.22,
+          "x": -3.72,
           "z": 1.92,
           "facing": -45,
           "posture": "sit"
@@ -456,28 +456,28 @@
       "blocking": [
         {
           "characterId": "juhyuk",
-          "x": 2.89,
+          "x": 3.39,
           "z": 2.26,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "jeongbae",
-          "x": 3.22,
+          "x": 3.72,
           "z": 1.92,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "seunguk",
-          "x": 3.56,
+          "x": 4.06,
           "z": 1.59,
           "facing": 45,
           "posture": "sit"
         },
         {
           "characterId": "dongyeol",
-          "x": -3.22,
+          "x": -3.72,
           "z": 1.92,
           "facing": -45,
           "posture": "sit"
@@ -527,7 +527,7 @@
       "blocking": [
         {
           "characterId": "juhyuk",
-          "x": 2.89,
+          "x": 3.39,
           "z": 2.26,
           "facing": 45,
           "posture": "sit"
