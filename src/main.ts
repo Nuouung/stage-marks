@@ -31,7 +31,7 @@ function render(s: AppState) {
   const composed = moveObjects(composeStage(s.stage, s.project, s.staging), look.objects);
   const house = s.stage.house ? describeHouse(s.stage.house) : [];
   const guides = s.showActingArea ? describeActingArea(s.staging.actingArea) : [];
-  renderer.draw([...describeStage(composed), ...house, ...guides, ...describeCharacters(composed, s.project, look.characters)]);
+  renderer.draw([...describeStage(composed), ...house, ...guides, ...describeCharacters(composed, s.project, look.characters, s.stage.house)]);
   renderControls(
     controlsRoot,
     { title: `${s.project.title} · ${s.stage.venue}`, dataVersion: s.staging.dataVersion, scenes: s.project.scenes, marks: s.project.marks, currentMarkId: s.markId, designated: s.project.characters.filter((c) => look.characters[c.id]), curtains: composed.curtains, view: s.view, showActingArea: s.showActingArea },

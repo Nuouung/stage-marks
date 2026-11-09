@@ -26,7 +26,8 @@ export const Blocking = z.strictObject({
   z: z.number(),
   /** 바라보는 방향(도). 0 = 객석 정면 */
   facing: z.number().default(0),
-  posture: z.enum(["stand", "sit"]).default("stand"),
+  /** stand 서기, sit 의자에 앉기, floor 바닥에 앉기 */
+  posture: z.enum(["stand", "sit", "floor"]).default("stand"),
 });
 export type Blocking = z.infer<typeof Blocking>;
 

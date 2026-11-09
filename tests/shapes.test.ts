@@ -59,7 +59,7 @@ describe("인물 그리기", () => {
 describe("그릴 것 목록의 id", () => {
   it("물체마다 id가 달라 이전 무대와 비교할 수 있다", () => {
     const c = composed({ "draw-2": true });
-    const look = resolveMark(project, staging, "mark-3");
+    const look = resolveMark(project, staging, "1-1");
     const shapes = [...describeStage(c), ...describeActingArea(staging.actingArea), ...describeCharacters(c, project, look.characters)];
     expect(new Set(shapes.map((s) => s.id)).size).toBe(shapes.length);
   });
@@ -111,5 +111,17 @@ describe("객석", () => {
     expect(new Set(ids).size).toBe(ids.length);
     expect(ids).toContain("seat-A-14");
     expect(ids).toContain("seat-B-13");
+  });
+});
+
+describe("객석에 선 인물", () => {
+  it("객석 통로에 선 인물은 그 열의 단 높이에 선다", () => {
+    const house = stage.house!;
+    const z = house.frontZ - house.rowPitch * 2.5; // C열
+    expect(floorHeightAt(composed({}), -2.6, z, house)).toBeCloseTo(house.rowRise * 3);
+  });
+
+  it("무대와 객석 사이 빈 바닥은 높이 0이다", () => {
+    expect(floorHeightAt(composed({}), 0, -1, stage.house)).toBe(0);
   });
 });

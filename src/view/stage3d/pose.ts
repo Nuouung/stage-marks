@@ -41,6 +41,20 @@ export const POSES = {
     LeftUpLeg: [90, 0, 0],
     RightUpLeg: [90, 0, 0],
   },
+  /** 바닥에 앉기: 다리를 앞으로 뻗고 손은 몸 뒤 바닥을 짚는다 */
+  floor: {
+    Spine: [-10, 0, 0],
+    LeftArm: [-25, 0, 70],
+    LeftForeArm: [-25, 0, 70],
+    LeftHand: [-25, 0, 70],
+    RightArm: [-25, 0, -70],
+    RightForeArm: [-25, 0, -70],
+    RightHand: [-25, 0, -70],
+    LeftUpLeg: [80, 0, 6],
+    LeftLeg: [92, 0, 6],
+    RightUpLeg: [80, 0, -6],
+    RightLeg: [92, 0, -6],
+  },
 } satisfies Record<string, PoseDef>;
 export type PoseName = keyof typeof POSES;
 

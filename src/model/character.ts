@@ -6,7 +6,8 @@ export function characterHeight(c: Character): number {
 }
 
 /** 얼굴(눈) 높이 대략값(m). 서 있으면 키의 93%, 앉으면 키의 약 0.68배로 본다. */
-export function faceHeight(c: Character, posture: "stand" | "sit" = "stand"): number {
+export function faceHeight(c: Character, posture: "stand" | "sit" | "floor" = "stand"): number {
   const h = characterHeight(c);
+  if (posture === "floor") return h * 0.45;
   return posture === "sit" ? h * 0.68 : h * 0.93;
 }

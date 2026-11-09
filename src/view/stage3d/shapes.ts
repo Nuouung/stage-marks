@@ -17,7 +17,7 @@ export type Shape = {
   /** 바라보는 방향(도). 0 = 객석 정면 */
   rotationY?: number;
   /** figure 전용: 서 있음 / 앉음 */
-  pose?: "stand" | "sit";
+  pose?: "stand" | "sit" | "floor";
   /** figure 전용: 인물 모형 */
   avatar?: Avatar;
   /** chair 전용: 넘어진 상태 */
@@ -145,8 +145,13 @@ export function describeActingArea(area: { width: number; depth: number }): Shap
 }
 
 /** 바닥 위 (x, z)에 단상 같은 물체가 있으면 그 윗면 높이를 돌려준다. */
-export function floorHeightAt(composed: ComposedStage, x: number, z: number): number {
+export function floorHeightAt(composed: ComposedStage, x: number, z: number, house?: House): number {
   let h = 0;
+  // 객석 통로·단 위: 무대 앞끝보다 객석 쪽이면 그 열의 단 높이
+  if (house && z < house.frontZ) {
+    const row = Math.floor((house.frontZ - z) / house.rowPitch);
+    if (row < house.rows.length) h = house.rowRise * (row + 1);
+  }
   for (const o of composed.objects) {
     if (o.kind !== "platform") continue;
     const inX = Math.abs(x - o.position.x) <= o.size.x / 2;
@@ -157,7 +162,7 @@ export function floorHeightAt(composed: ComposedStage, x: number, z: number): nu
 }
 
 /** 지정된 인물을 사람 모형으로. 키·자세·방향을 넘기고, 모양은 렌더러가 만든다. */
-export function describeCharacters(composed: ComposedStage, project: Project, looks: Record<string, CharacterLook>): Shape[] {
+export function describeCharacters(composed: ComposedStage, project: Project, looks: Record<string, CharacterLook>, house?: House): Shape[] {
   const shapes: Shape[] = [];
   for (const c of project.characters) {
     const look = looks[c.id];
@@ -166,7 +171,7 @@ export function describeCharacters(composed: ComposedStage, project: Project, lo
       id: `char-${c.id}`,
       group: "character",
       kind: "figure",
-      position: { x: look.x, y: floorHeightAt(composed, look.x, look.z), z: look.z },
+      position: { x: look.x, y: floorHeightAt(composed, look.x, look.z, house), z: look.z },
       size: { x: 0.45, y: characterHeight(c), z: 0.3 },
       rotationY: look.facing,
       pose: look.posture,
