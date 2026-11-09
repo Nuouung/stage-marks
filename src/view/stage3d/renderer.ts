@@ -1,12 +1,9 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { DEFAULT_AVATAR } from "../../model";
-import { createBeam, updateBeam } from "./beams";
 import { planChanges } from "./changes";
 import { buildFigure } from "./figure";
-import { installLightCut, type CutRect } from "./lightCut";
 import { buildChair, buildTable, tipOver } from "./furniture";
-import type { LightBeam } from "./lights";
 import type { Shape } from "./shapes";
 
 /**
@@ -25,17 +22,12 @@ const VIEWS: Record<ViewName, { eye: [number, number, number]; target: [number, 
 };
 
 /** 그릴 것 목록(Shape[])을 받아 화면에 그리기만 한다. 무엇을 그릴지는 정하지 않는다. */
-export function createRenderer(canvas: HTMLCanvasElement, lightCut: CutRect | null = null) {
-  if (lightCut) installLightCut(lightCut);
+export function createRenderer(canvas: HTMLCanvasElement) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  // 빛을 받은 곳과 어두운 곳의 차이가 잘 보이도록 밝은 쪽을 부드럽게 눌러 준다
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   const scene = new THREE.Scene();
-  const WORK_BACKGROUND = new THREE.Color("#050608");
-  const BLACK = new THREE.Color("#000000");
-  let workLightOn = false;
-  scene.background = BLACK;
+  scene.background = new THREE.Color("#050608");
 
   const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
   const controls = new OrbitControls(camera, canvas);
@@ -51,7 +43,7 @@ export function createRenderer(canvas: HTMLCanvasElement, lightCut: CutRect | nu
   // 다른 탭에 다녀오면 화면 내용이 지워질 수 있다
   document.addEventListener("visibilitychange", invalidate);
 
-  // 작업등: 무대 구조를 보기 위한 전체 조명. 끄면 아주 희미한 빛만 남아 윤곽만 보인다
+  // 무대 전체를 고르게 밝히는 빛. 무대 조명은 다루지 않는다
   const hemi = new THREE.HemisphereLight("#ffffff", "#202020", 0.9);
   scene.add(hemi);
   const work = new THREE.DirectionalLight("#ffffff", 0.6);
@@ -92,16 +84,13 @@ export function createRenderer(canvas: HTMLCanvasElement, lightCut: CutRect | nu
       model.name = s.id;
       return model;
     }
-    // 반사가 없는 재질. 보는 각도와 상관없이 빛을 받은 만큼만 밝아서, 빛이 어디에 떨어지는지 그대로 보인다
+    // 반사가 없는 재질. 보는 각도와 상관없이 밝기가 고르다
     const mat = new THREE.MeshLambertMaterial({ color: s.color });
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(s.size.x, s.size.y, s.size.z), mat);
     mesh.position.copy(toThree(s.position.x, s.position.y + s.size.y / 2, s.position.z));
     if (s.rotationY) mesh.rotation.y = (-s.rotationY * Math.PI) / 180;
     if (s.outline) {
       const edges = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), new THREE.LineBasicMaterial({ color: "#4a4a50" }));
-      // 선은 조명과 상관없이 보이므로 작업등을 끄면 숨긴다
-      edges.visible = workLightOn;
-      edges.userData.guide = true;
       mesh.add(edges);
     }
     mesh.name = s.id;
@@ -155,64 +144,6 @@ export function createRenderer(canvas: HTMLCanvasElement, lightCut: CutRect | nu
     invalidate();
   }
 
-  /** 끄면 무대 조명이 닿는 곳 말고는 완전히 어둡다 */
-  function setWorkLight(on: boolean) {
-    workLightOn = on;
-    hemi.intensity = on ? 0.9 : 0;
-    work.intensity = on ? 0.6 : 0;
-    scene.background = on ? WORK_BACKGROUND : BLACK;
-    grid.visible = on;
-    layer.traverse((o) => {
-      if (o.userData.guide) o.visible = on;
-    });
-    invalidate();
-  }
-
-  // 빛 하나 = SpotLight 하나. id로 재사용하고, 꺼진 빛은 밝기만 0으로 둔다
-  const spots = new Map<string, THREE.SpotLight>();
-  const beamMeshes = new Map<string, ReturnType<typeof createBeam>>();
-  /** 헤이즈 농도 0~1. 0이면 빛줄기를 그리지 않는다 */
-  let haze = 0;
-  let lastBeams: LightBeam[] = [];
-  /** 밝기 100%인 빛의 세기. 거리와 상관없이 같은 값으로, 화면에서 보기 좋게 맞춘 값이다 */
-  const LIGHT_POWER = 6;
-  /** 빛줄기 진하기. 조명 계획에서 빛줄기가 잘 보이도록 맞춘 값이다 */
-  const BEAM_STRENGTH = 1.1;
-  function setLights(beams: LightBeam[]) {
-    invalidate();
-    lastBeams = beams;
-    for (const b of beams) {
-      let s = spots.get(b.id);
-      if (!s) {
-        s = new THREE.SpotLight();
-        s.decay = 0;
-        s.penumbra = 0.7;
-        scene.add(s, s.target);
-        spots.set(b.id, s);
-      }
-      s.color.set(b.color);
-      s.intensity = LIGHT_POWER * b.level;
-      s.angle = ((b.beamAngle / 2) * Math.PI) / 180;
-      s.position.copy(toThree(b.position.x, b.position.y, b.position.z));
-      s.target.position.copy(toThree(b.target.x, b.target.y, b.target.z));
-
-      let m = beamMeshes.get(b.id);
-      if (!m) {
-        m = createBeam(lightCut);
-        scene.add(m);
-        beamMeshes.set(b.id, m);
-      }
-      m.visible = b.showBeam && haze > 0 && b.level > 0;
-      if (m.visible) updateBeam(m, s.position, s.target.position, b.beamAngle, b.color, BEAM_STRENGTH * haze * b.level);
-    }
-  }
-
-  function setHaze(level: number) {
-    if (level === haze) return;
-    haze = level;
-    setLights(lastBeams);
-  }
-
   function setView(name: ViewName) {
     const v = VIEWS[name];
     camera.position.copy(toThree(...v.eye));
@@ -243,5 +174,5 @@ export function createRenderer(canvas: HTMLCanvasElement, lightCut: CutRect | nu
     renderer.render(scene, camera);
   });
 
-  return { draw, setView, setLights, setWorkLight, setHaze };
+  return { draw, setView };
 }

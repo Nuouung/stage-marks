@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { characterHeight, CueLight, faceHeight, Stage } from "../src/model";
+import { characterHeight, faceHeight, Stage } from "../src/model";
 import { composeStage, moveObjects } from "../src/stage/compose";
 import bonomaru from "../data/stages/bonomaru.json";
 import { tinyProject, tinyStaging } from "./fixtures";
@@ -48,18 +48,6 @@ describe("인물 키", () => {
   it("앉으면 얼굴 높이가 서 있을 때보다 낮다", () => {
     const c = { id: "x", role: "r", label: "l" };
     expect(faceHeight(c, "sit")).toBeLessThan(faceHeight(c, "stand"));
-  });
-});
-
-describe("큐의 조명값", () => {
-  it("구역과 방향에 밝기와 색을 적을 수 있다", () => {
-    expect(CueLight.safeParse({ zone: "down-center", direction: "front", intensity: 50, color: { cct: 3200 } }).success).toBe(true);
-  });
-
-  it("없는 구역이나 방향, 정해지지 않은 항목을 적으면 데이터 검사에서 걸린다", () => {
-    expect(CueLight.safeParse({ zone: "middle", direction: "front" }).success).toBe(false);
-    expect(CueLight.safeParse({ zone: "down-center", direction: "side" }).success).toBe(false);
-    expect(CueLight.safeParse({ zone: "down-center", direction: "front", beamAngle: 30 }).success).toBe(false);
   });
 });
 

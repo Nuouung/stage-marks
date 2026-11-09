@@ -18,10 +18,3 @@ export type Vec3 = z.infer<typeof Vec3>;
 /** 데이터끼리 서로 가리킬 때 쓰는 이름표. 영문 소문자·숫자·하이픈만. */
 export const Id = z.string().regex(/^[a-z0-9-]+$/, "id는 영문 소문자, 숫자, 하이픈만 쓸 수 있음");
 export type Id = z.infer<typeof Id>;
-
-/** 조명 색. RGB(+W) 혼합이거나 흰색 색온도(K) 중 하나. */
-export const LightColor = z.union([
-  z.object({ r: z.number().min(0).max(255), g: z.number().min(0).max(255), b: z.number().min(0).max(255), w: z.number().min(0).max(255).optional() }),
-  z.object({ cct: z.number().min(1000).max(20000) }),
-]);
-export type LightColor = z.infer<typeof LightColor>;

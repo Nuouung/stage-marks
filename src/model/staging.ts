@@ -1,6 +1,5 @@
 import { z } from "zod";
 import { Id, Vec3 } from "./common";
-import { CueLight } from "./light";
 
 /**
  * 배치(Staging): "이 작품을 이 공연장에서" 할 때만 의미 있는 것.
@@ -41,10 +40,9 @@ export const ObjectMove = z.object({
 });
 export type ObjectMove = z.infer<typeof ObjectMove>;
 
-/** 작품의 큐 하나에 대해, 이 공연장에서 바뀌는 조명값·인물 위치·물체 위치. 바뀐 것만 적는다. */
+/** 작품의 큐 하나에 대해, 이 공연장에서 바뀌는 인물 위치·물체 위치. 바뀐 것만 적는다. */
 export const CueValues = z.object({
   cueId: Id,
-  lights: z.array(CueLight).default([]),
   blocking: z.array(Blocking).default([]),
   objects: z.array(ObjectMove).default([]),
 });
@@ -58,10 +56,8 @@ export const Staging = z.object({
   curtainOverrides: z.record(z.string(), z.boolean()).default({}),
   /** 이 배치에서 쓰지 않는 막. 화면과 조작부에 나오지 않는다 */
   hiddenCurtains: z.array(Id).default([]),
-  /** 연기 공간(조명으로 비추는 영역). 무대 중앙 기준 폭, 무대 앞끝부터의 깊이(m). 조명 구역이 이걸 나눠서 정해진다 */
+  /** 연기 공간. 무대 중앙 기준 폭, 무대 앞끝부터의 깊이(m). 바닥에 테이프로 표시한다 */
   actingArea: z.object({ width: z.number().positive(), depth: z.number().positive() }),
-  /** 빛을 연기 공간 안쪽으로 모아서 보여 준다 */
-  cutLightsToActingArea: z.boolean().default(false),
   /** 놓지 않은 물체는 무대에 나오지 않는다 */
   placements: z.array(Placement),
   /** 큐마다 바뀌는 값. 아무것도 안 바뀌는 큐는 빠져도 된다 */

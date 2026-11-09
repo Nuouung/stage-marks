@@ -3,7 +3,7 @@ import { Id, Vec3 } from "./common";
 
 /**
  * 작품(Project): 공연장이 바뀌어도 그대로 가져가는 것.
- * 대본·인물·장·세트 정의·큐 목록. 좌표나 조명값처럼 공연장마다 달라지는 건 넣지 않는다(→ Staging).
+ * 대본·인물·장·세트 정의·큐 목록. 좌표처럼 공연장마다 달라지는 건 넣지 않는다(→ Staging).
  */
 
 /** 세트 물체의 정의 (트럭에 싣고 다니는 것). 어디 놓을지는 Staging에서 정한다. 박스로 단순화. */
@@ -46,7 +46,7 @@ export type Character = z.infer<typeof Character>;
 export const Scene = z.object({ id: Id, name: z.string() });
 export type Scene = z.infer<typeof Scene>;
 
-/** 큐 목록의 한 줄. 공연장과 무관한 정보만. 이 큐에서 조명·인물이 어떻게 되는지는 Staging에. */
+/** 큐 목록의 한 줄. 공연장과 무관한 정보만. 이 큐에서 인물·물체가 어떻게 되는지는 Staging에. */
 export const Cue = z.object({
   id: Id,
   /** 큐 번호. 소수 허용(12.5) */
