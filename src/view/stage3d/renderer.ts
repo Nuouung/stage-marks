@@ -62,7 +62,7 @@ export function createRenderer(canvas: HTMLCanvasElement) {
 
   function meshOf(s: Shape): THREE.Object3D {
     if (s.kind === "figure") {
-      const fig = buildFigure(s.size.y, s.pose ?? "stand", s.avatar ?? DEFAULT_AVATAR, invalidate);
+      const fig = buildFigure(s.size.y, s.pose ?? "stand", s.avatar ?? DEFAULT_AVATAR, invalidate, s.ghost === true);
       placeFigure(fig, s);
       fig.name = s.id;
       return fig;
@@ -99,6 +99,9 @@ export function createRenderer(canvas: HTMLCanvasElement) {
       if ((o instanceof THREE.Mesh || o instanceof THREE.LineSegments) && !o.userData.shared) {
         o.geometry.dispose();
         (o.material as THREE.Material).dispose();
+      } else if (o instanceof THREE.Mesh && o.userData.ownMaterial) {
+        // 흐린 인물은 재질만 자기 것이다
+        for (const m of [o.material].flat()) (m as THREE.Material).dispose();
       }
     });
   }

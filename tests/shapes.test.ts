@@ -47,7 +47,7 @@ describe("인물 그리기", () => {
   it("인물은 키와 자세를 가진 사람 모형으로 그려진다", () => {
     const c = composed({});
     const ch = project.characters[0]!;
-    const fig = describeCharacters(c, project, { [ch.id]: { x: 0, z: 1, facing: 0, posture: "stand" } })[0]!;
+    const fig = describeCharacters(c, project, { [ch.id]: { x: 0, z: 1, facing: 0, posture: "stand", free: false } })[0]!;
     expect(fig).toMatchObject({ kind: "figure", size: { y: characterHeight(ch) }, pose: "stand" });
   });
 
@@ -123,5 +123,16 @@ describe("객석에 선 인물", () => {
 
   it("무대와 객석 사이 빈 바닥은 높이 0이다", () => {
     expect(floorHeightAt(composed({}), 0, -1, stage.house)).toBe(0);
+  });
+});
+
+describe("자유동선 인물 모양", () => {
+  it("자유동선 인물만 흐리게 그린다", () => {
+    const [a, b] = project.characters;
+    const shapes = describeCharacters(composed({}), project, {
+      [a!.id]: { x: 0, z: 1, facing: 0, posture: "stand", free: false },
+      [b!.id]: { x: 1, z: 1, facing: 0, posture: "stand", free: true },
+    });
+    expect(shapes.map((s) => s.ghost === true)).toEqual([false, true]);
   });
 });

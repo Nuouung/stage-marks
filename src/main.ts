@@ -34,7 +34,8 @@ function render(s: AppState) {
   renderer.draw([...describeStage(composed), ...house, ...guides, ...describeCharacters(composed, s.project, look.characters, s.stage.house)]);
   renderControls(
     controlsRoot,
-    { title: `${s.project.title} · ${s.stage.venue}`, dataVersion: s.staging.dataVersion, scenes: s.project.scenes, marks: s.project.marks, currentMarkId: s.markId, designated: s.project.characters.filter((c) => look.characters[c.id]), curtains: composed.curtains, view: s.view, showActingArea: s.showActingArea },
+    { title: `${s.project.title} · ${s.stage.venue}`, dataVersion: s.staging.dataVersion, scenes: s.project.scenes, marks: s.project.marks, currentMarkId: s.markId, fixed: s.project.characters.filter((c) => look.characters[c.id] && !look.characters[c.id]!.free),
+        free: s.project.characters.filter((c) => look.characters[c.id]?.free), curtains: composed.curtains, view: s.view, showActingArea: s.showActingArea },
     {
       onMark: (id) => store.setState({ markId: id }),
       onView: (view) => {

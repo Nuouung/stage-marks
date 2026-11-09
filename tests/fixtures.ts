@@ -33,9 +33,9 @@ export function tinyStaging(): Staging {
     placements: [{ objectId: "box", position: { x: 0, y: 0, z: 3 }, rotation: 0, tipped: false }],
     dataVersion: "test",
     marks: [
-      { markId: "m1", blocking: [{ characterId: "p", x: 0, z: 2, facing: 0, posture: "sit" }], objects: [] },
+      { markId: "m1", blocking: [{ characterId: "p", x: 0, z: 2, facing: 0, posture: "sit", free: false }], objects: [] },
       { markId: "m2", blocking: [], objects: [{ objectId: "box", position: { x: 1, y: 0, z: 2 }, tipped: true }] },
-      { markId: "m3", blocking: [{ characterId: "p", x: 1, z: 1, facing: 0, posture: "stand" }], objects: [{ objectId: "box", tipped: false }] },
+      { markId: "m3", blocking: [{ characterId: "p", x: 1, z: 1, facing: 0, posture: "stand", free: false }], objects: [{ objectId: "box", tipped: false }] },
     ],
   };
 }

@@ -18,6 +18,8 @@ export type Shape = {
   rotationY?: number;
   /** figure 전용: 서 있음 / 앉음 */
   pose?: "stand" | "sit" | "floor";
+  /** 흐리게 그린다(자유동선 인물) */
+  ghost?: boolean;
   /** figure 전용: 인물 모형 */
   avatar?: Avatar;
   /** chair 전용: 넘어진 상태 */
@@ -161,7 +163,7 @@ export function floorHeightAt(composed: ComposedStage, x: number, z: number, hou
   return h;
 }
 
-/** 지정된 인물을 사람 모형으로. 키·자세·방향을 넘기고, 모양은 렌더러가 만든다. */
+/** 무대에 있는 인물을 사람 모형으로. 자유동선 인물은 흐리게. 키·자세·방향을 넘기고, 모양은 렌더러가 만든다. */
 export function describeCharacters(composed: ComposedStage, project: Project, looks: Record<string, CharacterLook>, house?: House): Shape[] {
   const shapes: Shape[] = [];
   for (const c of project.characters) {
@@ -178,6 +180,7 @@ export function describeCharacters(composed: ComposedStage, project: Project, lo
       color: c.color ?? "#d9c2a8",
       avatar: c.avatar ?? DEFAULT_AVATAR,
       label: c.label,
+      ...(look.free ? { ghost: true } : {}),
     });
   }
   return shapes;

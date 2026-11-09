@@ -8,8 +8,10 @@ export type ControlsProps = {
   scenes: Scene[];
   marks: Mark[];
   currentMarkId: string;
-  /** 지금 포인트에서 지정된 인물 (공연 인물 순서) */
-  designated: Character[];
+  /** 지금 포인트에서 위치가 정해진 인물 (공연 인물 순서) */
+  fixed: Character[];
+  /** 지금 포인트에서 무대에 있지만 자유동선인 인물 */
+  free: Character[];
   curtains: Curtain[];
   view: ViewName;
   showActingArea: boolean;
@@ -34,7 +36,7 @@ export function renderControls(root: HTMLElement, p: ControlsProps, h: ControlsH
   const nth = mark ? inScene.findIndex((m) => m.id === mark.id) + 1 : 0;
   const scene = p.scenes.find((s) => s.id === mark?.sceneId);
   const draws = p.curtains.filter((c) => c.kind === "draw");
-  const who = p.designated.map((c) => `<span class="who" style="--c:${c.color ?? "#d9c2a8"}">${esc(c.label)}</span>`).join("");
+  const chips = (cs: Character[], cls = "") => cs.map((c) => `<span class="who ${cls}" style="--c:${c.color ?? "#d9c2a8"}">${esc(c.label)}</span>`).join("");
 
   root.innerHTML = `
     <header><strong>${esc(p.title)}</strong><span class="ver">데이터 ${esc(p.dataVersion)}</span></header>
@@ -57,7 +59,13 @@ export function renderControls(root: HTMLElement, p: ControlsProps, h: ControlsH
       </div>
       <button data-mark="next" ${index < 0 || index >= p.marks.length - 1 ? "disabled" : ""} aria-label="다음 지정 포인트">▶</button>
     </section>
-    ${mark ? `<p class="designated">${who ? `지정 ${who}` : "지정된 인물 없음"}<small>그 외 인물은 배우 재량</small></p>` : ""}
+    ${
+      mark
+        ? `<p class="designated"><span class="tag">지정</span>${p.fixed.length ? chips(p.fixed) : "<em>없음</em>"}</p>
+           ${p.free.length ? `<p class="designated"><span class="tag">자유</span>${chips(p.free, "free")}</p>` : ""}
+           <p class="legend">흐린 인물은 자유동선이에요. 위치는 참고용이에요. 무대에 없는 인물은 퇴장 상태예요.</p>`
+        : ""
+    }
     <section class="row"><span>보기</span>${(Object.keys(VIEW_LABEL) as ViewName[])
       .map((v) => `<button data-view="${v}" class="${v === p.view ? "on" : ""}">${VIEW_LABEL[v]}</button>`)
       .join("")}</section>

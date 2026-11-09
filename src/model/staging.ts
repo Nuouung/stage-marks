@@ -18,7 +18,7 @@ export const Placement = z.object({
 });
 export type Placement = z.infer<typeof Placement>;
 
-/** 지정 포인트에서 인물 한 명의 위치·자세. 여기 적힌 인물만 화면에 나온다(지정 안 된 인물은 배우 재량). */
+/** 지정 포인트에서 인물 한 명의 위치·자세. 여기 적힌 인물만 화면에 나온다. 적지 않은 인물은 무대 밖이다. */
 export const Blocking = z.strictObject({
   characterId: Id,
   /** 바닥 위치 (x, z). 단상 위면 높이는 물체에서 계산 */
@@ -28,6 +28,8 @@ export const Blocking = z.strictObject({
   facing: z.number().default(0),
   /** stand 서기, sit 의자에 앉기, floor 바닥에 앉기 */
   posture: z.enum(["stand", "sit", "floor"]).default("stand"),
+  /** 무대에는 있지만 자유동선. 위치는 대략 이쯤이라는 참고값이고, 화면에 흐리게 나온다 */
+  free: z.boolean().default(false),
 });
 export type Blocking = z.infer<typeof Blocking>;
 

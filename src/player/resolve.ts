@@ -7,7 +7,7 @@ export type ObjectLook = Omit<ObjectMove, "objectId">;
 
 /** 어느 지정 포인트 시점의 무대 상태 */
 export type Look = {
-  /** 이 포인트에서 지정된 인물만. 지정 안 된 인물은 배우 재량이라 없다 */
+  /** 이 포인트에 무대에 있는 인물. 자유동선 인물은 free가 켜져 있다. 없는 인물은 무대 밖 */
   characters: Record<string, CharacterLook>;
   objects: Record<string, ObjectLook>;
 };

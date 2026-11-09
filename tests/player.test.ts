@@ -44,3 +44,11 @@ describe("포인트 넘기기", () => {
     expect(prevMarkId(p, "m3")).toBe("m2");
   });
 });
+
+describe("자유동선 인물", () => {
+  it("자유동선으로 적은 인물은 무대에 있되 free가 켜져 있다", () => {
+    const staging = tinyStaging();
+    staging.marks[1]!.blocking.push({ characterId: "p", x: 0, z: 1, facing: 0, posture: "stand", free: true });
+    expect(resolveMark(tinyProject(), staging, "m2").characters.p).toMatchObject({ free: true });
+  });
+});
