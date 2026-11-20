@@ -1,5 +1,4 @@
 import type { Character, Curtain, Mark, Scene } from "../../model";
-import type { ViewName } from "../stage3d/renderer";
 
 /** 화면 아래 조작부. 버튼이 눌리면 콜백만 부른다. 상태는 직접 바꾸지 않는다. */
 export type ControlsProps = {
@@ -13,18 +12,14 @@ export type ControlsProps = {
   /** 지금 포인트에서 무대에 있지만 자유동선인 인물 */
   free: Character[];
   curtains: Curtain[];
-  view: ViewName;
   showActingArea: boolean;
 };
 
 export type ControlsHandlers = {
   onMark(id: string): void;
   onToggleCurtain(id: string): void;
-  onView(view: ViewName): void;
   onToggleActingArea(): void;
 };
-
-const VIEW_LABEL: Record<ViewName, string> = { audience: "객석", top: "위", side: "옆" };
 
 /** 대본·메모에 들어 있는 글자가 화면 구조를 깨지 않도록 */
 const esc = (t: string) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -66,12 +61,9 @@ export function renderControls(root: HTMLElement, p: ControlsProps, h: ControlsH
            <p class="legend">흐린 인물은 자유동선이에요. 위치는 참고용이에요. 무대에 없는 인물은 퇴장 상태예요.</p>`
         : ""
     }
-    <section class="row"><span>보기</span>${(Object.keys(VIEW_LABEL) as ViewName[])
-      .map((v) => `<button data-view="${v}" class="${v === p.view ? "on" : ""}">${VIEW_LABEL[v]}</button>`)
-      .join("")}</section>
-    <section class="row"><span>막</span>${draws
+    ${draws.length ? `<section class="row"><span>막</span>${draws
       .map((c) => `<button data-curtain="${c.id}" class="${c.closed ? "on" : ""}">${esc(c.name.split(" (")[0] ?? c.name)} ${c.closed ? "닫힘" : "열림"}</button>`)
-      .join("")}</section>
+      .join("")}</section>` : ""}
     <section class="row"><span>표시</span><button data-guide="acting" class="${p.showActingArea ? "on" : ""}">연기 공간 ${p.showActingArea ? "켬" : "끔"}</button></section>
   `;
 
@@ -89,7 +81,6 @@ export function renderControls(root: HTMLElement, p: ControlsProps, h: ControlsH
       if (first) h.onMark(first.id);
     }),
   );
-  root.querySelectorAll<HTMLButtonElement>("[data-view]").forEach((b) => b.addEventListener("click", () => h.onView(b.dataset.view as ViewName)));
   root.querySelector<HTMLButtonElement>("[data-guide=acting]")?.addEventListener("click", () => h.onToggleActingArea());
   root.querySelectorAll<HTMLButtonElement>("[data-curtain]").forEach((b) => b.addEventListener("click", () => h.onToggleCurtain(b.dataset.curtain!)));
 }
