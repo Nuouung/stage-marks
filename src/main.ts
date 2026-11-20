@@ -9,8 +9,9 @@ import { createRenderer, type ViewName } from "./view/stage3d/renderer";
 import { describeActingArea, describeCharacters, describeHouse, describeStage } from "./view/stage3d/shapes";
 import { renderControls } from "./view/ui/controls";
 import projectJson from "../data/projects/bodojichim.json";
-import stageJson from "../data/stages/bonomaru.json";
-import stagingJson from "../data/stagings/bodojichim-bonomaru.json";
+// 보노마루(bonomaru.json, bodojichim-bonomaru.json)는 데이터만 보존하고 화면에는 메카네를 띄운다
+import stageJson from "../data/stages/mekane.json";
+import stagingJson from "../data/stagings/bodojichim-mekane.json";
 
 type AppState = { project: Project; stage: Stage; staging: Staging; markId: string; view: ViewName; showActingArea: boolean };
 

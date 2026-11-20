@@ -15,9 +15,10 @@ const toThree = (x: number, y: number, z: number) => new THREE.Vector3(-x, y, z)
 export type ViewName = "audience" | "top" | "side";
 
 const VIEWS: Record<ViewName, { eye: [number, number, number]; target: [number, number, number] }> = {
-  audience: { eye: [0, 3.2, -6.5], target: [0, 1.5, 4.5] },
+  // 메카네 객석 가운데쯤(약 4열 통로) 앉은 눈높이. 보노마루 때는 [0, 3.2, -6.5] → [0, 1.5, 4.5]
+  audience: { eye: [0, 2.5, -4.6], target: [0, 1.1, 2.6] },
   // 객석이 화면 아래에 오도록 아주 살짝 객석 쪽에서 내려다본다
-  top: { eye: [0, 22, 4.6], target: [0, 0, 4.7] },
+  top: { eye: [0, 15, 1.4], target: [0, 0, 1.5] },
   side: { eye: [16, 5, 2], target: [0, 1.5, 4.5] },
 };
 

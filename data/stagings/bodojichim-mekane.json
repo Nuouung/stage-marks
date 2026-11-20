@@ -1,0 +1,1239 @@
+{
+  "id": "bodojichim-mekane",
+  "projectId": "bodojichim",
+  "stageId": "mekane",
+  "curtainOverrides": {},
+  "hiddenCurtains": [],
+  "actingArea": {
+    "width": 6.6,
+    "depth": 5.0
+  },
+  "placements": [
+    {
+      "objectId": "deck-2-01",
+      "position": {
+        "x": -0.91,
+        "y": 0.0,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-2-02",
+      "position": {
+        "x": 0,
+        "y": 0.0,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-2-03",
+      "position": {
+        "x": 0.91,
+        "y": 0.0,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-3-02",
+      "position": {
+        "x": -0.455,
+        "y": 0.145,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-3-03",
+      "position": {
+        "x": 0.455,
+        "y": 0.145,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-4-01",
+      "position": {
+        "x": -0.455,
+        "y": 0.29,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "deck-4-02",
+      "position": {
+        "x": 0.455,
+        "y": 0.29,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "desk-judge",
+      "position": {
+        "x": 0,
+        "y": 0.435,
+        "z": 4.09
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-judge",
+      "position": {
+        "x": 0,
+        "y": 0.435,
+        "z": 4.73
+      },
+      "rotation": 0,
+      "tipped": false
+    },
+    {
+      "objectId": "desk-left",
+      "position": {
+        "x": -2.2,
+        "y": 0,
+        "z": 1.6
+      },
+      "rotation": -45,
+      "tipped": false
+    },
+    {
+      "objectId": "desk-right",
+      "position": {
+        "x": 2.2,
+        "y": 0,
+        "z": 1.6
+      },
+      "rotation": 45,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-left-1",
+      "position": {
+        "x": -2.62,
+        "y": 0,
+        "z": 2.02
+      },
+      "rotation": -45,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-right-1",
+      "position": {
+        "x": 2.27,
+        "y": 0,
+        "z": 2.37
+      },
+      "rotation": 45,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-right-2",
+      "position": {
+        "x": 2.62,
+        "y": 0,
+        "z": 2.02
+      },
+      "rotation": 45,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-right-3",
+      "position": {
+        "x": 2.97,
+        "y": 0,
+        "z": 1.67
+      },
+      "rotation": 45,
+      "tipped": false
+    },
+    {
+      "objectId": "chair-down-left",
+      "position": {
+        "x": -1.888,
+        "y": 0,
+        "z": 4.2
+      },
+      "rotation": -25,
+      "tipped": true
+    },
+    {
+      "objectId": "chair-down-right",
+      "position": {
+        "x": 2.508,
+        "y": 0,
+        "z": 4.2
+      },
+      "rotation": 25,
+      "tipped": true
+    }
+  ],
+  "marks": [
+    {
+      "markId": "0-1",
+      "blocking": [
+        {
+          "characterId": "voice-2",
+          "x": 0,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "0-2",
+      "blocking": [
+        {
+          "characterId": "voice-2",
+          "x": 0,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 0.0,
+          "z": -4.3,
+          "facing": 180,
+          "posture": "stand"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 0.0,
+          "z": -5.2,
+          "facing": 180,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "0-3",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -0.9,
+          "z": 1.6,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 0.9,
+          "z": 1.6,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "1-1",
+      "blocking": [
+        {
+          "characterId": "voice-1",
+          "x": -1.707,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "voice-2",
+          "x": 1.707,
+          "z": 0.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -2.62,
+          "z": 2.02,
+          "facing": -45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "2-1",
+      "blocking": [
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -2.62,
+          "z": 2.02,
+          "facing": -45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "2-2",
+      "blocking": [
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": 1.1,
+          "z": 1.0,
+          "facing": 0,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "3-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.2,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": -0.4,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0.4,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.2,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -1.5,
+          "z": 1.6,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "3-2a",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.1,
+          "z": 1.1,
+          "facing": 0,
+          "posture": "floor"
+        },
+        {
+          "characterId": "wondal",
+          "x": -0.6,
+          "z": 2.85,
+          "facing": 0,
+          "posture": "floor"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": -0.2,
+          "z": 1.9,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0.9,
+          "z": 1.5,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.4,
+          "z": 1.6,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "3-2b",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.1,
+          "z": 1.1,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.5,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": -0.2,
+          "z": 1.9,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0.9,
+          "z": 1.5,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.4,
+          "z": 1.6,
+          "facing": 0,
+          "posture": "floor",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "3-2c",
+      "blocking": [
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.5,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 1.1,
+          "z": 1.1,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -2.44,
+          "z": 1.84,
+          "facing": -45,
+          "posture": "stand"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.44,
+          "z": 1.84,
+          "facing": 45,
+          "posture": "stand"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.79,
+          "z": 1.49,
+          "facing": 45,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "4-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -2.62,
+          "z": 2.02,
+          "facing": -45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "4-2",
+      "blocking": [
+        {
+          "characterId": "jeongbae",
+          "x": 0.4,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -0.4,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "5-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.2,
+          "z": 0.85,
+          "facing": 127,
+          "posture": "floor"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 0.4,
+          "z": 0.8,
+          "facing": 180,
+          "posture": "floor"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.146,
+          "z": 0.3,
+          "facing": 129,
+          "posture": "floor"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -0.4,
+          "z": 0.8,
+          "facing": 180,
+          "posture": "floor"
+        },
+        {
+          "characterId": "voice-1",
+          "x": 0,
+          "z": 2.5,
+          "facing": 0,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "5-2",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.2,
+          "z": 0.85,
+          "facing": 127,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 0.4,
+          "z": 0.8,
+          "facing": 180,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.146,
+          "z": 0.3,
+          "facing": 129,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -0.4,
+          "z": 0.8,
+          "facing": 180,
+          "posture": "floor",
+          "free": true
+        },
+        {
+          "characterId": "voice-1",
+          "x": 0,
+          "z": 2.5,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "6-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -2.62,
+          "z": 2.02,
+          "facing": -45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "7-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -1.65,
+          "z": 1.05,
+          "facing": 135,
+          "posture": "stand"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -2.62,
+          "z": 2.02,
+          "facing": -45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": 2.069,
+          "z": 3.4,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "7-2",
+      "blocking": [
+        {
+          "characterId": "voice-1",
+          "x": 0,
+          "z": 2.2,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": -1.65,
+          "z": 1.05,
+          "facing": -114,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": 2.069,
+          "z": 3.4,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit",
+          "free": true
+        }
+      ],
+      "objects": [
+        {
+          "objectId": "chair-down-left",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.2
+          },
+          "rotation": 0,
+          "tipped": false
+        }
+      ]
+    },
+    {
+      "markId": "7-3",
+      "blocking": [
+        {
+          "characterId": "voice-2",
+          "x": 0,
+          "z": 2.2,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "juhyuk",
+          "x": -1.65,
+          "z": 1.05,
+          "facing": -114,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 2.97,
+          "z": 1.67,
+          "facing": 45,
+          "posture": "sit",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": 2.069,
+          "z": 3.4,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 4.73,
+          "facing": 0,
+          "posture": "sit",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "8-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 2.27,
+          "z": 2.37,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 2.62,
+          "z": 2.02,
+          "facing": 45,
+          "posture": "sit"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0,
+          "z": 1.4,
+          "facing": 0,
+          "posture": "stand"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "9-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.2,
+          "z": 2.3,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": -0.4,
+          "z": 2.5,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0.4,
+          "z": 1.5,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.2,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "9-2",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": 1.2,
+          "z": 2.3,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "jeongbae",
+          "x": -0.4,
+          "z": 2.5,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "seunguk",
+          "x": 0.4,
+          "z": 1.5,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.2,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "10-1",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 1.3,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.3,
+          "z": 1.0,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -0.8,
+          "z": 1.8,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "10-2",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 1.3,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": 0,
+          "z": 2.2,
+          "facing": 0,
+          "posture": "sit"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -0.9,
+          "z": 2.4,
+          "facing": 0,
+          "posture": "stand",
+          "free": true
+        }
+      ],
+      "objects": [
+        {
+          "objectId": "chair-down-left",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.2
+          },
+          "rotation": 0,
+          "tipped": false
+        }
+      ]
+    },
+    {
+      "markId": "10-3",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 1.3,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.3,
+          "z": 1.0,
+          "facing": 0,
+          "posture": "floor"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -1.965,
+          "z": 0.35,
+          "facing": 180,
+          "posture": "crouch"
+        }
+      ],
+      "objects": []
+    },
+    {
+      "markId": "10-4",
+      "blocking": [
+        {
+          "characterId": "juhyuk",
+          "x": -1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "jeongbae",
+          "x": 1.862,
+          "z": 2.8,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "seunguk",
+          "x": 1.3,
+          "z": 0.9,
+          "facing": 0,
+          "posture": "crouch"
+        },
+        {
+          "characterId": "dongyeol",
+          "x": -1.3,
+          "z": 1.0,
+          "facing": 0,
+          "posture": "floor"
+        },
+        {
+          "characterId": "wondal",
+          "x": 0,
+          "z": 1.5,
+          "facing": 0,
+          "posture": "stand"
+        },
+        {
+          "characterId": "voice-1",
+          "x": -1.965,
+          "z": 0.35,
+          "facing": 180,
+          "posture": "crouch"
+        }
+      ],
+      "objects": []
+    }
+  ],
+  "notes": [
+    "보노마루 배치를 메카네 폭에 맞춰 옮긴 1차안(2026-11-21). 현장 확인 전 가정",
+    "단: 3×6 덧마루 3장 폭 2.73m, 3층(윗면 43.5cm). 보노마루(폭 6.06m, 4층 58cm)보다 줄임 — 조명 파이프가 3.05m로 낮음",
+    "책상: 중앙에서 2.2m, 객석 쪽으로 45도. 상수 책상 뒤 의자 3개는 벽까지 약 0.3m로 빠듯함",
+    "인물 위치는 보노마루 값을 자동 변환: 의자·책상 근처는 새 자리 기준으로 옮기고, 나머지는 중앙 1.5m 안은 그대로·바깥은 좁혀서 옮김. 0-2 객석 통로는 가운데 통로로",
+    "상수 앞 모서리 에어컨 처리 미정(덮기·벽 쪽 막·조명으로 죽이기 검토 중)"
+  ],
+  "dataVersion": "2026-11-21.1"
+}
